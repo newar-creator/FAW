@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAW - Frutiger Aero Wiki & Encyclopedia</title>
+  <meta name="description" content="Explore FAW (Frutiger Aero Wiki), a comprehensive, glossy visual encyclopedia of retro-futuristic internet aesthetics. Learn about Frutiger Aero, Aqua, Eco, Y2K, and more.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-aero">
+
+  <!-- ==========================================================================
+       Dynamic Background Layers (Aurora, Beams, Bubbles)
+       ========================================================================== -->
+  <div id="dynamic-bg-container">
+    <div class="aurora-layer aurora-layer-1"></div>
+    <div class="aurora-layer aurora-layer-2"></div>
+    <div class="aurora-layer aurora-layer-3"></div>
+    <div class="light-beam"></div>
+    <div class="light-beam"></div>
+    <div class="light-beam"></div>
+  </div>
+  
+  <!-- Interactive Bubble Layer -->
+  <div id="bubble-container"></div>
+
+  <!-- ==========================================================================
+       Top Portal Header
+       ========================================================================== -->
+  <header class="vista-header glass-panel">
+    <div class="header-left">
+      <!-- Glass Windows Vista-style Start Orb -->
+      <div class="start-orb-container" id="start-orb-btn" title="Unlock Aero Synth Sound System">
+        <div class="start-orb">
+          <div class="start-orb-icon">
+            <span class="orb-red"></span>
+            <span class="orb-green"></span>
+            <span class="orb-blue"></span>
+            <span class="orb-yellow"></span>
+          </div>
+        </div>
+      </div>
+      <div class="brand-text">
+        <h1>FAW</h1>
+        <span>Frutiger Aero Wiki</span>
+      </div>
+    </div>
+    
+    <div class="header-right">
+      <!-- Search Widget -->
+      <form class="search-container" id="header-search-form" onsubmit="event.preventDefault();">
+        <input type="text" placeholder="Search aesthetics..." id="search-input" autocomplete="off">
+        <button type="submit" class="search-btn" title="Search">🔍</button>
+      </form>
+      
+      <!-- Live Glass Clock Widget -->
+      <div class="glass-clock" id="digital-clock">20:39:30</div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       Reflective Horizontal Navigation Ribbon
+       ========================================================================== -->
+  <nav class="vista-nav">
+    <ul class="nav-links" id="main-navigation">
+      <li class="active" data-page="home"><a href="#" class="shine-hover">Home</a></li>
+      <li data-page="aesthetics"><a href="#" class="shine-hover">Aesthetics</a></li>
+      <li data-page="gallery"><a href="#" class="shine-hover">Gallery</a></li>
+      <li data-page="wallpapers"><a href="#" class="shine-hover">Wallpapers</a></li>
+      <li data-page="music"><a href="#" class="shine-hover">Music Recs</a></li>
+      <li data-page="timeline"><a href="#" class="shine-hover">Timeline</a></li>
+      <li data-page="about"><a href="#" class="shine-hover">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- ==========================================================================
+       Main Portal Grid (Sidebar + Dynamic Workspace Stage)
+       ========================================================================== -->
+  <main class="vista-container">
+    
+    <!-- Left Sidebar Column -->
+    <div class="sidebar-wrapper">
+      
+      <!-- Directory / Navigation Tree -->
+      <aside class="sidebar-widget glass-panel">
+        <h3><span class="widget-icon">📂</span> Explore Portal</h3>
+        <ul>
+          <li><a href="#" onclick="switchPage('home')">🏠 Home Portal</a></li>
+          <li><a href="#" onclick="switchPage('aesthetics')">🌀 Aesthetics Database</a></li>
+          <li><a href="#" onclick="viewRandomAesthetic()">🎲 Random Aesthetic</a></li>
+          <li><a href="#" onclick="switchPage('gallery')">🖼️ Visual Gallery</a></li>
+          <li><a href="#" onclick="switchPage('wallpapers')">💻 Desktop Assets</a></li>
+          <li><a href="#" onclick="switchPage('music')">🎵 Sound Archive</a></li>
+        </ul>
+      </aside>
+
+      <!-- Windows Media Player 11 Clone -->
+      <aside class="sidebar-widget glass-panel wmp11-widget">
+        <div class="wmp-header">
+          <span class="wmp-title">Windows Media Player</span>
+          <span class="widget-icon">⚡</span>
+        </div>
+        
+        <!-- Active visualizer screen -->
+        <div class="wmp-visualizer-container" id="wmp-stage" title="Click to change visualization style">
+          <canvas class="wmp-canvas" id="visualizer-canvas"></canvas>
+          <div class="wmp-info-overlay">
+            <div class="wmp-song-title" id="wmp-track-name">Procedural Ambient Pad</div>
+            <div class="wmp-artist-name">FAW Synth Engine</div>
+          </div>
+        </div>
+        
+        <!-- Media Controls -->
+        <div class="wmp-controls">
+          <div class="wmp-timeline-slider" id="wmp-timeline" title="Track timeline scrubber">
+            <div class="wmp-progress-bar" id="wmp-progress"></div>
+          </div>
+          <div class="wmp-button-row">
+            <button class="wmp-btn" id="wmp-prev-btn" title="Previous Track">⏮</button>
+            <button class="wmp-btn wmp-play-btn" id="wmp-play-btn" title="Play / Pause Ambient Synth">▶</button>
+            <button class="wmp-btn" id="wmp-next-btn" title="Next Track">⏭</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Theme Customizer Widget -->
+      <aside class="sidebar-widget glass-panel theme-selector-widget">
+        <h3><span class="widget-icon">🎨</span> Personalize</h3>
+        <div class="theme-btn-container">
+          <button class="theme-opt-btn theme-opt-aero active" data-theme="aero">
+            🔵 Windows Aero
+          </button>
+          <button class="theme-opt-btn theme-opt-dark" data-theme="dark">
+            🟢 Dark Aero (Ultimate)
+          </button>
+          <button class="theme-opt-btn theme-opt-basic" data-theme="basic">
+            🔘 Windows Basic
+          </button>
+        </div>
+      </aside>
+
+      <!-- Featured Spotlight Spot -->
+      <aside class="sidebar-widget glass-panel">
+        <h3><span class="widget-icon">⭐</span> Spotlight</h3>
+        <div class="spotlight-card" id="sidebar-spotlight" style="cursor: pointer;">
+          <img src="" alt="Featured Spotlight" class="spotlight-img" id="spotlight-image">
+          <div class="spotlight-info">
+            <h4 id="spotlight-title">Featured Aesthetic</h4>
+            <p id="spotlight-desc">Discover the optimistic future people imagined in the late 2000s.</p>
+          </div>
+        </div>
+      </aside>
+      
+    </div>
+
+    <!-- Right Dynamic Stage Panel -->
+    <section class="glass-panel stage-panel" id="main-stage">
+      <!-- Loading view placeholder -->
+      <div style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column; gap: 15px; color: var(--text-muted);">
+        <div style="font-size: 28px; animation: bubble-wobble 2s infinite alternate;">🌀</div>
+        <p>Loading Vista Glass interface...</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       Full-Screen Gallery Lightbox Popup
+       ========================================================================== -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightbox-close">&times;</button>
+      <img src="" alt="Full-sized Wallpaper" class="lightbox-img" id="lightbox-img">
+      <div class="lightbox-caption" id="lightbox-caption">Wallpaper Image</div>
+    </div>
+  </div>
+
+  <!-- Core Script Injection -->
+  <script src="app.js"></script>
+</body>
+</html>
