@@ -861,6 +861,32 @@ function switchPage(pageId, recordHistory = true) {
         li.classList.add("active");
       }
     });
+
+    // Highlight Active Link in Mobile Navigation Bar & Sub-Bar
+    const mobileBtns = document.querySelectorAll(".mobile-nav-btn");
+    const mobileMoreItems = document.querySelectorAll(".mobile-more-item");
+    
+    mobileBtns.forEach(btn => btn.classList.remove("active"));
+    mobileMoreItems.forEach(item => item.classList.remove("active"));
+    
+    const isAestheticArticle = aestheticsDatabase[pageId] !== undefined;
+    if (pageId === 'aesthetics' || isAestheticArticle) {
+      const activeBtn = document.querySelector(`.mobile-nav-btn[data-page="aesthetics"]`);
+      if (activeBtn) activeBtn.classList.add("active");
+    } else if (pageId === 'home') {
+      const activeBtn = document.querySelector(`.mobile-nav-btn[data-page="home"]`);
+      if (activeBtn) activeBtn.classList.add("active");
+    } else if (pageId === 'gallery') {
+      const activeBtn = document.querySelector(`.mobile-nav-btn[data-page="gallery"]`);
+      if (activeBtn) activeBtn.classList.add("active");
+    } else {
+      // It's in the More menu
+      const moreBtn = document.getElementById("mobile-more-toggle-btn");
+      if (moreBtn) moreBtn.classList.add("active");
+      
+      const activeItem = document.querySelector(`.mobile-more-item[data-page="${pageId}"]`);
+      if (activeItem) activeItem.classList.add("active");
+    }
     
     // Render dynamic page template
     if (pageId === 'home') {
@@ -899,6 +925,25 @@ function switchPage(pageId, recordHistory = true) {
     mainStage.style.transform = "translateY(0)";
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, 350);
+}
+
+// --------------------------------------------------------------------------
+// Mobile Tab Navigation Helper Functions
+// --------------------------------------------------------------------------
+function toggleMobileMoreMenu() {
+  playClickSound();
+  const panel = document.getElementById("mobile-more-panel");
+  if (panel) {
+    panel.classList.toggle("show");
+  }
+}
+
+function switchMobileMorePage(pageId) {
+  switchPage(pageId);
+  const panel = document.getElementById("mobile-more-panel");
+  if (panel) {
+    panel.classList.remove("show");
+  }
 }
 
 // --------------------------------------------------------------------------
@@ -985,10 +1030,10 @@ function renderHomePage() {
       </div>
       <div class="intro-panel">
         <h3>Wiki Statistics & Status</h3>
-        <p style="margin-bottom: 6px;">🟢 <strong>Database Status</strong>: Fully loaded & active</p>
-        <p style="margin-bottom: 6px;">📂 <strong>Indexed Aesthetics</strong>: 11 movements cataloged</p>
-        <p style="margin-bottom: 6px;">🔊 <strong>Audio Engine</strong>: Procedural synthesis online</p>
-        <p>🫧 <strong>Interaction</strong>: Click floating bubbles to pop them!</p>
+        <p style="margin-bottom: 6px;"><span class="glass-dot dot-online" style="display:inline-block; vertical-align:middle; margin-right:4px;"></span> <strong>Database Status</strong>: Fully loaded & active</p>
+        <p style="margin-bottom: 6px;"><img src="icons/folder.png" class="aero-icon" alt="Folder"> <strong>Indexed Aesthetics</strong>: 11 movements cataloged</p>
+        <p style="margin-bottom: 6px;"><img src="icons/sound.png" class="aero-icon" alt="Audio"> <strong>Audio Engine</strong>: Procedural synthesis online</p>
+        <p><img src="icons/icon_smiley.png" class="aero-icon" alt="Interaction"> <strong>Interaction</strong>: Click floating bubbles to pop them!</p>
       </div>
     </div>
     
@@ -1073,7 +1118,7 @@ function renderAestheticArticle(data) {
     if (!relData) return;
     relatedLinksHTML += `
       <button class="back-btn" onclick="switchPage('${relId}')" style="margin-right: 8px; margin-top:5px; float:left;">
-        🔗 ${relData.name}
+        <img src="icons/icon_network.png" class="aero-icon" alt="Link"> ${relData.name}
       </button>
     `;
   });
@@ -1095,7 +1140,7 @@ function renderAestheticArticle(data) {
 
   return `
     <div class="back-btn-container">
-      <button class="back-btn" onclick="switchPage('aesthetics')">⬅ Back to Portal</button>
+      <button class="back-btn" onclick="switchPage('aesthetics')"><span style="font-size: 11px; vertical-align: middle; position: relative; top: -1px; margin-right: 2px;">◀</span> Back to Portal</button>
     </div>
 
     <div class="article-header">
@@ -1151,11 +1196,11 @@ function renderAestheticArticle(data) {
     <div class="article-section">
       <h3>Ambient Audio & Music Recommendations</h3>
       <div class="music-rec-box">
-        <div class="music-rec-art">💿</div>
+        <div class="music-rec-art"><img src="icons/cd.png" class="music-cd-icon" alt="CD"></div>
         <div class="music-rec-info">
           <h4>${data.music}</h4>
           <p><strong>Recommended Artists:</strong> ${data.musicArtist}</p>
-          <p style="font-size:11px; opacity:0.8; margin-top:4px;">🎧 <em>Tip: Open the Windows Media Player in the sidebar to activate ambient synthesizer loops!</em></p>
+          <p style="font-size:11px; opacity:0.8; margin-top:4px;"><img src="icons/sound.png" class="aero-icon" alt="Audio"> <em>Tip: Open the Windows Media Player in the sidebar to activate ambient synthesizer loops!</em></p>
         </div>
       </div>
     </div>
@@ -1175,7 +1220,7 @@ function renderAestheticArticle(data) {
     </div>
 
     <div class="article-section">
-      <h3>Community Chat Discussion</h3>
+      <h3><img src="icons/icon_messenger.png" class="aero-icon" alt="Chat" style="margin-right: 6px;">Community Chat Discussion</h3>
       <div class="fake-chat-box" id="article-chat">
         <div class="chat-msg">
           <span class="chat-user">AeroNovice99:</span>
@@ -1208,7 +1253,7 @@ function renderGalleryPage() {
         </div>
         <div class="gallery-item-footer">
           <span class="gallery-item-title">${name}</span>
-          <span class="download-link" onclick="event.stopPropagation(); triggerDownloadSimulation('${imgUrl}')">⬇ Download</span>
+          <span class="download-link" onclick="event.stopPropagation(); triggerDownloadSimulation('${imgUrl}')"><img src="icons/play.png" class="aero-icon" style="transform: rotate(90deg);" alt="Download"> Download</span>
         </div>
       </div>
     `;
@@ -1267,7 +1312,7 @@ function renderMusicRecsPage() {
     const data = aestheticsDatabase[key];
     listHTML += `
       <div class="glass-panel" style="padding: 15px; display:flex; gap:15px; align-items:center; background:rgba(255,255,255,0.12);">
-        <div style="font-size:28px; background:var(--accent-glow); padding:10px; border-radius:50%; width:50px; height:50px; display:flex; justify-content:center; align-items:center;">🎹</div>
+        <div style="background:var(--accent-glow); padding:10px; border-radius:50%; width:50px; height:50px; display:flex; justify-content:center; align-items:center;"><img src="icons/sound.png" style="width: 32px; height: 32px;" alt="Audio"></div>
         <div>
           <h4 style="font-weight:700; font-size:14.5px;">${data.name} Audio Profile</h4>
           <p style="font-size:12.5px; margin-bottom:3px;"><strong>Vibe:</strong> ${data.music}</p>

@@ -50,7 +50,7 @@
       <!-- Search Widget -->
       <form class="search-container" id="header-search-form" onsubmit="event.preventDefault();">
         <input type="text" placeholder="Search aesthetics..." id="search-input" autocomplete="off">
-        <button type="submit" class="search-btn" title="Search">🔍</button>
+        <button type="submit" class="search-btn" title="Search"><img src="icons/search.png" class="aero-icon" alt="Search"></button>
       </form>
       
       <!-- Live Glass Clock Widget -->
@@ -83,14 +83,14 @@
       
       <!-- Directory / Navigation Tree -->
       <aside class="sidebar-widget glass-panel">
-        <h3><span class="widget-icon">📂</span> Explore Portal</h3>
+        <h3><span class="widget-icon"><img src="icons/folder.png" class="aero-icon" alt="Explore"></span> Explore Portal</h3>
         <ul>
-          <li><a href="#" onclick="switchPage('home')">🏠 Home Portal</a></li>
-          <li><a href="#" onclick="switchPage('aesthetics')">🌀 Aesthetics Database</a></li>
-          <li><a href="#" onclick="viewRandomAesthetic()">🎲 Random Aesthetic</a></li>
-          <li><a href="#" onclick="switchPage('gallery')">🖼️ Visual Gallery</a></li>
-          <li><a href="#" onclick="switchPage('wallpapers')">💻 Desktop Assets</a></li>
-          <li><a href="#" onclick="switchPage('music')">🎵 Sound Archive</a></li>
+          <li><a href="#" onclick="switchPage('home')"><img src="icons/home.png" class="aero-icon" alt="Home"> Home Portal</a></li>
+          <li><a href="#" onclick="switchPage('aesthetics')"><img src="icons/aero_orb.png" class="aero-icon" alt="Aesthetics"> Aesthetics Database</a></li>
+          <li><a href="#" onclick="viewRandomAesthetic()"><img src="icons/games.png" class="aero-icon" alt="Random"> Random Aesthetic</a></li>
+          <li><a href="#" onclick="switchPage('gallery')"><img src="icons/gallery.png" class="aero-icon" alt="Gallery"> Visual Gallery</a></li>
+          <li><a href="#" onclick="switchPage('wallpapers')"><img src="icons/computer.png" class="aero-icon" alt="Wallpapers"> Desktop Assets</a></li>
+          <li><a href="#" onclick="switchPage('music')"><img src="icons/music.png" class="aero-icon" alt="Music"> Sound Archive</a></li>
         </ul>
       </aside>
 
@@ -98,7 +98,7 @@
       <aside class="sidebar-widget glass-panel wmp11-widget">
         <div class="wmp-header">
           <span class="wmp-title">Windows Media Player</span>
-          <span class="widget-icon">⚡</span>
+          <span class="widget-icon"><img src="icons/play.png" class="aero-icon" alt="WMP"></span>
         </div>
         
         <!-- Active visualizer screen -->
@@ -125,23 +125,23 @@
 
       <!-- Theme Customizer Widget -->
       <aside class="sidebar-widget glass-panel theme-selector-widget">
-        <h3><span class="widget-icon">🎨</span> Personalize</h3>
+        <h3><span class="widget-icon"><img src="icons/personalize.png" class="aero-icon" alt="Personalize"></span> Personalize</h3>
         <div class="theme-btn-container">
           <button class="theme-opt-btn theme-opt-aero active" data-theme="aero">
-            🔵 Windows Aero
+            <span class="glass-dot dot-aero"></span> Windows Aero
           </button>
           <button class="theme-opt-btn theme-opt-dark" data-theme="dark">
-            🟢 Dark Aero (Ultimate)
+            <span class="glass-dot dot-dark"></span> Dark Aero (Ultimate)
           </button>
           <button class="theme-opt-btn theme-opt-basic" data-theme="basic">
-            🔘 Windows Basic
+            <span class="glass-dot dot-basic"></span> Windows Basic
           </button>
         </div>
       </aside>
 
       <!-- Featured Spotlight Spot -->
       <aside class="sidebar-widget glass-panel">
-        <h3><span class="widget-icon">⭐</span> Spotlight</h3>
+        <h3><span class="widget-icon"><img src="icons/star.png" class="aero-icon" alt="Spotlight"></span> Spotlight</h3>
         <div class="spotlight-card" id="sidebar-spotlight" style="cursor: pointer;">
           <img src="" alt="Featured Spotlight" class="spotlight-img" id="spotlight-image">
           <div class="spotlight-info">
@@ -157,7 +157,7 @@
     <section class="glass-panel stage-panel" id="main-stage">
       <!-- Loading view placeholder -->
       <div style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column; gap: 15px; color: var(--text-muted);">
-        <div style="font-size: 28px; animation: bubble-wobble 2s infinite alternate;">🌀</div>
+        <div style="animation: bubble-wobble 2s infinite alternate;"><img src="icons/aero_orb.png" style="width: 48px; height: 48px;" alt="Loading"></div>
         <p>Loading Vista Glass interface...</p>
       </div>
     </section>
@@ -173,6 +173,48 @@
       <img src="" alt="Full-sized Wallpaper" class="lightbox-img" id="lightbox-img">
       <div class="lightbox-caption" id="lightbox-caption">Wallpaper Image</div>
     </div>
+  </div>
+
+  <!-- ==========================================================================
+       Mobile Bottom Tab Navigation Bar
+       ========================================================================== -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
+    <button class="mobile-nav-btn active" data-page="home" onclick="switchPage('home')">
+      <img src="icons/home.png" class="mobile-nav-icon" alt="Home">
+      <span>Home</span>
+    </button>
+    <button class="mobile-nav-btn" data-page="aesthetics" onclick="switchPage('aesthetics')">
+      <img src="icons/aero_orb.png" class="mobile-nav-icon" alt="Aesthetics">
+      <span>Database</span>
+    </button>
+    <button class="mobile-nav-btn" data-page="gallery" onclick="switchPage('gallery')">
+      <img src="icons/gallery.png" class="mobile-nav-icon" alt="Gallery">
+      <span>Gallery</span>
+    </button>
+    <button class="mobile-nav-btn" id="mobile-more-toggle-btn" onclick="toggleMobileMoreMenu()">
+      <img src="icons/folder.png" class="mobile-nav-icon" alt="More">
+      <span>More</span>
+    </button>
+  </nav>
+
+  <!-- Horizontal scroll single-row subbar for the "More" items -->
+  <div class="mobile-more-panel" id="mobile-more-panel">
+    <button class="mobile-more-item" data-page="wallpapers" onclick="switchMobileMorePage('wallpapers')">
+      <img src="icons/computer.png" class="mobile-more-icon" alt="Wallpapers">
+      <span>Wallpapers</span>
+    </button>
+    <button class="mobile-more-item" data-page="music" onclick="switchMobileMorePage('music')">
+      <img src="icons/music.png" class="mobile-more-icon" alt="Music">
+      <span>Music Recs</span>
+    </button>
+    <button class="mobile-more-item" data-page="timeline" onclick="switchMobileMorePage('timeline')">
+      <img src="icons/play.png" class="mobile-more-icon" alt="Timeline">
+      <span>Timeline</span>
+    </button>
+    <button class="mobile-more-item" data-page="about" onclick="switchMobileMorePage('about')">
+      <img src="icons/icon_smiley.png" class="mobile-more-icon" alt="About">
+      <span>About</span>
+    </button>
   </div>
 
   <!-- Core Script Injection -->
